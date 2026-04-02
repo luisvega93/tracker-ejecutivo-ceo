@@ -53,7 +53,7 @@ function buildSeedTasks() {
     activeCount: importResult.activeCount,
     completedCount: importResult.completedCount,
     inferredYear: importResult.inferredYear,
-    tasks: tasks.filter((task) => task.status !== "completado"),
+    tasks,
   };
 }
 

@@ -2,7 +2,7 @@
 
 Aplicacion web minimalista para seguimiento ejecutivo. La portada publica esta pensada para el CEO y muestra solo tareas activas; el panel `/admin` permite al COO dar de alta, editar, completar y consultar el historico.
 
-Tambien incluye un modo de publicacion estatica en GitHub Pages, similar al flujo de Cataliza, para que la vista del CEO quede disponible sin Vercel ni Supabase.
+Tambien incluye un modo de publicacion estatica en GitHub Pages, similar al flujo de Cataliza, para que la vista del CEO quede disponible sin Vercel ni Supabase. En esa modalidad, la misma web permite cambiar entre vista CEO y vista COO, con edicion local guardada en el navegador.
 
 ## Stack
 
@@ -21,12 +21,12 @@ app/
   page.tsx
   admin/
     page.tsx
-    actions.ts
     login/
       page.tsx
-      actions.ts
 components/
   admin/
+  tracker-shell.tsx
+  static-coo-workspace.tsx
   ui/
 lib/
   auth.ts
@@ -105,7 +105,7 @@ Que hace el importador:
 
 ## Actualizar la version publica para GitHub Pages
 
-La publicacion estatica del CEO no lee Supabase. Toma sus datos del archivo versionado `data/tracker-public.json`, que se genera desde tu Excel local.
+La publicacion estatica no lee Supabase. Toma sus datos del archivo versionado `data/tracker-public.json`, que se genera desde tu Excel local.
 
 Cada vez que cambies `TRACKER CEO.xlsx`, actualiza el snapshot:
 
@@ -117,7 +117,7 @@ Ese comando:
 
 - Lee la hoja `Tracker`
 - Aplica la misma limpieza del importador
-- Conserva solo tareas activas para la vista publica
+- Conserva tareas activas y completadas para soportar tambien la vista COO local
 - Genera `data/tracker-public.json`
 
 Despues haz commit y push para que GitHub Pages publique el cambio.
@@ -174,7 +174,8 @@ https://TU_USUARIO.github.io/tracker-ejecutivo-ceo/
 
 Notas:
 
-- Esta version publica muestra la vista del CEO usando `data/tracker-public.json`
+- Esta version publica muestra la vista del CEO y una vista COO editable usando `data/tracker-public.json`
+- La vista COO de GitHub Pages guarda cambios en `localStorage`, solo en el navegador actual
 - El panel `/admin` queda deshabilitado en GitHub Pages porque requiere runtime y Supabase
 - Si necesitas alta y edicion operativa del COO, usa el proyecto en local o en un hosting con runtime
 

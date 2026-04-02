@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-02T19:59:06.672Z",
+  "generatedAt": "2026-04-02T20:14:31.257Z",
   "tasks": [
     {
       "id": "seed-3",
@@ -11,8 +11,8 @@
       "comentarios": "NOTARIA 90 -ANALISIS EXPEDIENTES - ELOISA CORREOS MUY BUENA RESPUETA",
       "fecha_raw": "AVANCES SEMANALES",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-4",
@@ -24,8 +24,8 @@
       "comentarios": "",
       "fecha_raw": "23-27 MARZO",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-5",
@@ -37,8 +37,8 @@
       "comentarios": "se constituyo empresa , se ve la mejor opcion fiscal para pago a julio A",
       "fecha_raw": "18-Mar",
       "fecha_iso": "2026-03-18",
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-6",
@@ -50,8 +50,8 @@
       "comentarios": "Pendiente de constitución - sisal -REGULARIZA",
       "fecha_raw": "SIN FECHA",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-7",
@@ -63,8 +63,8 @@
       "comentarios": "se presenta una segunda opcion a BB.",
       "fecha_raw": "19-Mar",
       "fecha_iso": "2026-03-19",
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-8",
@@ -76,8 +76,21 @@
       "comentarios": "lanzamiento Marina vallarta , espera vobo margarte - cierre mandar margarte",
       "fecha_raw": "9-13 marzo",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
+    },
+    {
+      "id": "seed-9",
+      "source_row": 9,
+      "order_number": "6.2",
+      "concepto": "DOCUMENTO -AVISO -NO CREDITO -MR",
+      "responsable": "JC",
+      "status": "completado",
+      "comentarios": "propuesta final",
+      "fecha_raw": "9-Mar",
+      "fecha_iso": "2026-03-09",
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-10",
@@ -89,8 +102,8 @@
       "comentarios": "propuesta final",
       "fecha_raw": "23-27 MARZO",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-11",
@@ -102,8 +115,21 @@
       "comentarios": "Permuta por acciones de restaurante, unidades MR 2-103 CAMBIO y MR 10-301, en revisión el proyecto de contrato- UNIDADES OK - ultima negociacion bb- oK 254K-339K",
       "fecha_raw": "SIN FECHA",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
+    },
+    {
+      "id": "seed-12",
+      "source_row": 12,
+      "order_number": "11",
+      "concepto": "TERRENO BAHÍA PRÍNCIPE",
+      "responsable": "ANA -ELOISA",
+      "status": "completado",
+      "comentarios": "Permuta Perla Inclan, deduccion cuotas apartir de agosto-alvaro",
+      "fecha_raw": "SIN FECHA",
+      "fecha_iso": null,
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-13",
@@ -115,8 +141,8 @@
       "comentarios": "unidades definidas ,edena ,san miguel ,la paz ..pendiente proy lomas v --JOSE VICTOR",
       "fecha_raw": "SIN FECHA",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-14",
@@ -128,8 +154,8 @@
       "comentarios": "kick off - area - memo y claudia apoyan en ejeccucion",
       "fecha_raw": "SIN FECHA",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-15",
@@ -141,8 +167,8 @@
       "comentarios": "se presentaron opciones de depas - sek -santa m - UNIDADES -PAGO-URBANIZACION",
       "fecha_raw": "9-13 MARZO",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-16",
@@ -154,8 +180,8 @@
       "comentarios": "alexander dic 2026 - sentencia - opciones",
       "fecha_raw": "SIN FECHA",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-17",
@@ -167,8 +193,8 @@
       "comentarios": "definio estrategia - procede notificar a araujo la posesion de nosotros de la propiedad .vender 50% cada quien .. Costo $100 mil -proced notif-jud incum cont-villareal - rebeldia -remediacion convenio -deudas -ojo pld-",
       "fecha_raw": "SIN FECHA",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-18",
@@ -180,8 +206,8 @@
       "comentarios": "mapa empresas - REE credito fiscal $788,009.mn isr -TSE canc sellos -DPS credito fiscal agua $6,673.483.mn- presentacion anuales -DPS y REE 25 marzo",
       "fecha_raw": "25-Mar",
       "fecha_iso": "2026-03-25",
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-19",
@@ -193,8 +219,8 @@
       "comentarios": "SEK NOTARIA , NAUTICO NOTARIA VIABILIDAD, EDENA SUB DIVISION -,MR R MAESTRO",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-20",
@@ -206,8 +232,8 @@
       "comentarios": "MONEX 1781-COM TAO-$320- SOFOM OJO -COM TAO -URGE CERRAR -CAMPAÑA ESCR",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-21",
@@ -219,8 +245,8 @@
       "comentarios": "sx",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-23",
@@ -232,8 +258,8 @@
       "comentarios": "AKUMAL -SARGENTO -CERRITOS -PUERTO E -MARINA CABOS",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-24",
@@ -245,8 +271,8 @@
       "comentarios": "COMERCIAL CAMPAÑAS -CREDITO -SEG ESTRATEGIA FISCAL - FINANZAS OBRA -COBRANZA",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-25",
@@ -258,8 +284,8 @@
       "comentarios": "TE PRESENTAMOS CUADRO - CERRITOS -MESA UVA - COYOTE -",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-26",
@@ -271,8 +297,8 @@
       "comentarios": "TABLA - PAGOS - calle rapido - kineki cirucuitos",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-27",
@@ -284,8 +310,8 @@
       "comentarios": "plaza aleb- inmuebles bb - pagar costo - pagar impuest -declaro sat 2024 -alex gutierrez",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-28",
@@ -297,8 +323,8 @@
       "comentarios": "SELECCIÓN 3 CANIDATOS - ULISES -ERNESTO -MARTA",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-29",
@@ -310,8 +336,8 @@
       "comentarios": "DOBLE COMPRA - inter c cheques . Millon millon 140 veces -deducible obra - acciones -bosco",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-30",
@@ -323,8 +349,8 @@
       "comentarios": "misma formula , act inmobilario",
       "fecha_raw": "31-Mar",
       "fecha_iso": "2026-03-31",
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     },
     {
       "id": "seed-31",
@@ -336,8 +362,8 @@
       "comentarios": "bodegas - rayamudo - bodega",
       "fecha_raw": "",
       "fecha_iso": null,
-      "created_at": "2026-04-02T19:59:06.672Z",
-      "updated_at": "2026-04-02T19:59:06.672Z"
+      "created_at": "2026-04-02T20:14:31.257Z",
+      "updated_at": "2026-04-02T20:14:31.257Z"
     }
   ]
 }
