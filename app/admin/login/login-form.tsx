@@ -1,36 +1,55 @@
 "use client";
 
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { LockKeyhole, Mail } from "lucide-react";
 
-import {
-  loginAction,
-  type LoginActionState,
-} from "@/app/admin/login/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-const initialState: LoginActionState = {
-  error: null,
-};
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button className="w-full" size="lg" type="submit">
-      {pending ? "Ingresando..." : "Entrar al panel"}
-    </Button>
-  );
-}
+import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { loginSchema } from "@/lib/tracker/schemas";
 
 type LoginFormProps = {
   notice?: string;
 };
 
 export function LoginForm({ notice }: LoginFormProps) {
-  const [state, formAction] = useActionState(loginAction, initialState);
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = (formData: FormData) => {
+    setError(null);
+
+    startTransition(async () => {
+      const supabase = createSupabaseBrowserClient();
+
+      if (!supabase) {
+        setError("Configura Supabase antes de usar el panel administrativo.");
+        return;
+      }
+
+      const parsed = loginSchema.safeParse({
+        email: formData.get("email"),
+        password: formData.get("password"),
+      });
+
+      if (!parsed.success) {
+        setError(parsed.error.issues[0]?.message ?? "Revisa tus credenciales.");
+        return;
+      }
+
+      const { error: signInError } = await supabase.auth.signInWithPassword(parsed.data);
+
+      if (signInError) {
+        setError("No fue posible iniciar sesion. Revisa correo y contrasena.");
+        return;
+      }
+
+      router.push("/admin");
+      router.refresh();
+    });
+  };
 
   return (
     <div
@@ -55,13 +74,13 @@ export function LoginForm({ notice }: LoginFormProps) {
         </div>
       ) : null}
 
-      {state.error ? (
+      {error ? (
         <div className="mt-6 rounded-2xl border border-red/20 bg-red-soft px-4 py-3 text-sm text-red">
-          {state.error}
+          {error}
         </div>
       ) : null}
 
-      <form action={formAction} className="mt-6 space-y-4">
+      <form action={handleSubmit} className="mt-6 space-y-4">
         <label className="space-y-2 text-sm">
           <span className="font-semibold text-foreground">Correo</span>
           <div className="relative">
@@ -78,7 +97,9 @@ export function LoginForm({ notice }: LoginFormProps) {
           </div>
         </label>
 
-        <SubmitButton />
+        <Button className="w-full" size="lg" type="submit">
+          {isPending ? "Ingresando..." : "Entrar al panel"}
+        </Button>
       </form>
     </div>
   );

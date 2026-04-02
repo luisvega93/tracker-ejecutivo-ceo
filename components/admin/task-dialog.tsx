@@ -4,7 +4,6 @@ import type { FormEvent } from "react";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
-import { upsertTaskAction } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,8 +16,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { TRACKER_STATUS_OPTIONS } from "@/lib/tracker/constants";
+import { formatIsoDateForDisplay } from "@/lib/tracker/format";
+import { trackerTaskFormSchema } from "@/lib/tracker/schemas";
 import type { TrackerTask, TrackerStatus } from "@/lib/tracker/types";
+import { normalizeWhitespace } from "@/lib/utils";
 
 type TaskDialogProps = {
   open: boolean;
@@ -57,13 +60,49 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
     setErrorMessage(null);
 
     startTransition(async () => {
-      const result = await upsertTaskAction({
+      const supabase = createSupabaseBrowserClient();
+
+      if (!supabase) {
+        setErrorMessage("Falta la configuracion publica de Supabase para guardar cambios.");
+        return;
+      }
+
+      const parsed = trackerTaskFormSchema.safeParse({
         id: task?.id,
         ...formState,
       });
 
-      if (!result.success) {
-        setErrorMessage(result.error);
+      if (!parsed.success) {
+        setErrorMessage(
+          parsed.error.issues[0]?.message ?? "Revisa los datos capturados.",
+        );
+        return;
+      }
+
+      const data = parsed.data;
+      const fechaRaw = normalizeWhitespace(data.fecha_raw);
+      const normalizedPayload = {
+        concepto: normalizeWhitespace(data.concepto),
+        responsable: normalizeWhitespace(data.responsable),
+        status: data.status,
+        comentarios: data.comentarios.trim(),
+        fecha_raw: fechaRaw || (data.fecha_iso ? formatIsoDateForDisplay(data.fecha_iso) : ""),
+        fecha_iso: data.fecha_iso,
+      };
+
+      const mutation = data.id
+        ? await supabase
+            .from("tracker_tasks")
+            .update(normalizedPayload)
+            .eq("id", data.id)
+        : await supabase.from("tracker_tasks").insert({
+            source_row: null,
+            order_number: null,
+            ...normalizedPayload,
+          });
+
+      if (mutation.error) {
+        setErrorMessage(`No se pudo guardar la tarea: ${mutation.error.message}`);
         return;
       }
 
@@ -78,6 +117,8 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
     <Dialog
       onOpenChange={(nextOpen) => {
         if (!isPending) {
+          setFormState(buildFormState(nextOpen ? task : null));
+          setErrorMessage(null);
           onOpenChange(nextOpen);
         }
       }}

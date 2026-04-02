@@ -1,6 +1,8 @@
 import "server-only";
 
+import { isGithubPagesBuild } from "@/lib/site-config";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
+import { getStaticPublicTasks } from "@/lib/tracker/public-seed";
 import type { TrackerTask } from "@/lib/tracker/types";
 
 const TASK_COLUMNS =
@@ -22,10 +24,14 @@ function getBaseTaskQuery() {
 }
 
 export async function getPublicTasks() {
+  if (isGithubPagesBuild) {
+    return { tasks: getStaticPublicTasks(), missingConfig: false };
+  }
+
   const query = getBaseTaskQuery();
 
   if (!query) {
-    return { tasks: [] as TrackerTask[], missingConfig: true };
+    return { tasks: getStaticPublicTasks(), missingConfig: false };
   }
 
   const { data, error } = await query.neq("status", "completado");

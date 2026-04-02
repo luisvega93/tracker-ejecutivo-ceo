@@ -1,14 +1,24 @@
 import { redirect } from "next/navigation";
 
-import { AdminDashboard } from "@/components/admin/admin-dashboard";
-import { LogoutButton } from "@/components/admin/logout-button";
 import { SetupPanel } from "@/components/setup-panel";
 import { getAdminAuthState } from "@/lib/auth";
+import { isGithubPagesBuild } from "@/lib/site-config";
 import { getAdminTasks } from "@/lib/tracker/queries";
 
-export const dynamic = "force-dynamic";
-
 export default async function AdminPage() {
+  if (isGithubPagesBuild) {
+    return (
+      <main className="mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center px-4 py-10">
+        <div className="w-full max-w-3xl">
+          <SetupPanel
+            description="La publicacion en GitHub Pages deja visible solo la vista del CEO. El panel del COO sigue disponible cuando ejecutes el proyecto con Supabase en local o en un hosting con runtime."
+            title="Panel COO no disponible en GitHub Pages"
+          />
+        </div>
+      </main>
+    );
+  }
+
   const authState = await getAdminAuthState();
 
   if (authState.kind === "missing-env") {
@@ -42,6 +52,9 @@ export default async function AdminPage() {
       </main>
     );
   }
+
+  const { AdminDashboard } = await import("@/components/admin/admin-dashboard");
+  const { LogoutButton } = await import("@/components/admin/logout-button");
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-7xl px-4 py-6 md:px-6 md:py-10">

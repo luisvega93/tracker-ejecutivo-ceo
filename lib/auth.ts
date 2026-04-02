@@ -32,7 +32,23 @@ export async function getAdminAuthState(): Promise<AdminAuthState> {
     return { kind: "unauthenticated" };
   }
 
-  if (!isAuthorizedAdminEmail(user.email)) {
+  if (isAuthorizedAdminEmail(user.email)) {
+    return { kind: "authorized", user };
+  }
+
+  const normalizedEmail = user.email?.trim().toLowerCase();
+
+  if (!normalizedEmail) {
+    return { kind: "unauthorized", user };
+  }
+
+  const { data, error } = await supabase
+    .from("tracker_admins")
+    .select("email")
+    .eq("email", normalizedEmail)
+    .maybeSingle();
+
+  if (error || !data) {
     return { kind: "unauthorized", user };
   }
 

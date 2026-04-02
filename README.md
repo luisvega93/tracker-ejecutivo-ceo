@@ -2,6 +2,8 @@
 
 Aplicacion web minimalista para seguimiento ejecutivo. La portada publica esta pensada para el CEO y muestra solo tareas activas; el panel `/admin` permite al COO dar de alta, editar, completar y consultar el historico.
 
+Tambien incluye un modo de publicacion estatica en GitHub Pages, similar al flujo de Cataliza, para que la vista del CEO quede disponible sin Vercel ni Supabase.
+
 ## Stack
 
 - Next.js 16 con App Router
@@ -9,6 +11,7 @@ Aplicacion web minimalista para seguimiento ejecutivo. La portada publica esta p
 - Tailwind CSS v4
 - Supabase para PostgreSQL + Auth
 - Script de importacion desde Excel con `xlsx`
+- Snapshot estatico versionado para GitHub Pages
 - Pruebas unitarias con Vitest
 
 ## Estructura principal
@@ -32,8 +35,11 @@ lib/
   tracker/
 scripts/
   import-tracker.ts
+  sync-public-data.ts
 supabase/sql/
   001_init.sql
+data/
+  tracker-public.json
 tests/
   importer.test.ts
 ```
@@ -66,7 +72,15 @@ Copy-Item .env.example .env.local
 2. En el SQL Editor, ejecuta el archivo `supabase/sql/001_init.sql`.
 3. En `Authentication`, desactiva el registro publico si no quieres altas abiertas.
 4. Crea manualmente el usuario del COO en `Authentication > Users`.
-5. Asegurate de incluir el correo del COO en `AUTHORIZED_ADMIN_EMAILS`.
+5. Registra el correo del COO tambien en `public.tracker_admins`, por ejemplo:
+
+```sql
+insert into public.tracker_admins (email)
+values ('coo@empresa.com')
+on conflict (email) do nothing;
+```
+
+6. Si quieres una segunda barrera a nivel app, tambien puedes incluir el correo del COO en `AUTHORIZED_ADMIN_EMAILS`.
 
 ## Importar el Excel
 
@@ -88,6 +102,25 @@ Que hace el importador:
 - Guarda `fecha_raw` tal como se ve en Excel
 - Guarda `fecha_iso` solo cuando la fecha se puede resolver de forma segura
 - Hace `upsert` por `source_row` para permitir reimportaciones sin duplicar
+
+## Actualizar la version publica para GitHub Pages
+
+La publicacion estatica del CEO no lee Supabase. Toma sus datos del archivo versionado `data/tracker-public.json`, que se genera desde tu Excel local.
+
+Cada vez que cambies `TRACKER CEO.xlsx`, actualiza el snapshot:
+
+```powershell
+npm.cmd run sync:public-data -- --file ".\\TRACKER CEO.xlsx"
+```
+
+Ese comando:
+
+- Lee la hoja `Tracker`
+- Aplica la misma limpieza del importador
+- Conserva solo tareas activas para la vista publica
+- Genera `data/tracker-public.json`
+
+Despues haz commit y push para que GitHub Pages publique el cambio.
 
 Nota de seguridad:
 
@@ -115,7 +148,8 @@ npm.cmd run build
 
 - No se incluyen credenciales en el repositorio.
 - Crea el usuario del COO desde Supabase Auth.
-- Define el correo autorizado en `AUTHORIZED_ADMIN_EMAILS`.
+- Agrega el correo del COO a `public.tracker_admins`.
+- Si quieres reforzarlo tambien desde la app, define `AUTHORIZED_ADMIN_EMAILS`.
 - El login del COO vive en `/admin/login`.
 
 ## Despliegue
@@ -126,6 +160,23 @@ npm.cmd run build
 2. Configura las mismas variables de entorno del `.env.local`.
 3. Despliega.
 4. Despues del primer deploy, vuelve a ejecutar la importacion apuntando al proyecto Supabase productivo si todavia no existe la data.
+
+### GitHub Pages
+
+1. El repo ya incluye `.github/workflows/github-pages.yml`.
+2. Cada push a `main` construye una exportacion estatica de Next.js.
+3. El workflow publica `out/` en GitHub Pages.
+4. La URL final sigue este patron:
+
+```text
+https://TU_USUARIO.github.io/tracker-ejecutivo-ceo/
+```
+
+Notas:
+
+- Esta version publica muestra la vista del CEO usando `data/tracker-public.json`
+- El panel `/admin` queda deshabilitado en GitHub Pages porque requiere runtime y Supabase
+- Si necesitas alta y edicion operativa del COO, usa el proyecto en local o en un hosting con runtime
 
 ## Publicar el repo en GitHub
 
@@ -151,8 +202,15 @@ Si prefieres crearlo primero con GitHub CLI:
 gh repo create TU_REPO_PUBLICO --public --source . --remote origin --push
 ```
 
+Para dejar GitHub Pages activo usando Actions:
+
+```powershell
+gh api -X POST repos/TU_USUARIO/TU_REPO_PUBLICO/pages -f build_type=workflow
+```
+
 ## Nota importante para repositorio publico
 
 - No subas `.env.local`
 - No subas `TRACKER CEO.xlsx` salvo que lo sanitices
+- El snapshot `data/tracker-public.json` si se versiona para que GitHub Pages pueda construir la vista publica
 - No inventes llaves ni credenciales; este proyecto esta listo para publicarse cuando tengas tu propio proyecto Supabase y tu repo de GitHub
