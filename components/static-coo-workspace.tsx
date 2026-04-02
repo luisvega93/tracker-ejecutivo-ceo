@@ -1,7 +1,14 @@
 "use client";
 
 import { startTransition, useDeferredValue, useState } from "react";
-import { Database, PencilLine, RefreshCcw, Search, ShieldCheck } from "lucide-react";
+import {
+  Database,
+  LockKeyhole,
+  PencilLine,
+  RefreshCcw,
+  Search,
+  ShieldCheck,
+} from "lucide-react";
 
 import { StaticTaskDialog } from "@/components/static-task-dialog";
 import { StatusBadge } from "@/components/status-badge";
@@ -13,6 +20,7 @@ import { normalizeSearchValue } from "@/lib/utils";
 
 type StaticCooWorkspaceProps = {
   hasLocalChanges: boolean;
+  onLock: () => void;
   onReset: () => void;
   onSaveTask: (payload: Omit<TrackerTaskInput, "id">, taskId?: string) => void;
   publishedAt: string;
@@ -30,6 +38,7 @@ function formatPublishedLabel(publishedAt: string) {
 
 export function StaticCooWorkspace({
   hasLocalChanges,
+  onLock,
   onReset,
   onSaveTask,
   publishedAt,
@@ -205,6 +214,15 @@ export function StaticCooWorkspace({
                 <Button onClick={openCreateDialog} size="lg">
                   <PencilLine className="size-4" />
                   Nueva tarea
+                </Button>
+
+                <Button
+                  onClick={onLock}
+                  size="lg"
+                  variant="ghost"
+                >
+                  <LockKeyhole className="size-4" />
+                  Bloquear
                 </Button>
 
                 <Button

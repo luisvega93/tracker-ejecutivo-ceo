@@ -4,9 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import { BriefcaseBusiness, Eye, MonitorCog } from "lucide-react";
 
 import { CeoTracker } from "@/components/ceo-tracker";
+import { CooAccessPanel } from "@/components/coo-access-panel";
 import { StaticCooWorkspace } from "@/components/static-coo-workspace";
 import { Button } from "@/components/ui/button";
 import { trackerStorageKey, trackerViewStorageKey } from "@/lib/site-config";
+import {
+  clearGrantedCooAccess,
+  hasGrantedCooAccess,
+} from "@/lib/tracker/static-access";
 import { sortTrackerTasks } from "@/lib/tracker/sort";
 import type { TrackerTask, TrackerTaskInput } from "@/lib/tracker/types";
 
@@ -38,6 +43,7 @@ function buildLocalTask(payload: Omit<TrackerTaskInput, "id">): TrackerTask {
 export function TrackerShell({ initialTasks, publishedAt }: TrackerShellProps) {
   const [tasks, setTasks] = useState<TrackerTask[]>(() => sortTrackerTasks(initialTasks));
   const [view, setView] = useState<TrackerView>("ceo");
+  const [hasCooAccess, setHasCooAccess] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
@@ -53,6 +59,8 @@ export function TrackerShell({ initialTasks, publishedAt }: TrackerShellProps) {
       if (savedView === "ceo" || savedView === "coo") {
         setView(savedView);
       }
+
+      setHasCooAccess(hasGrantedCooAccess());
     } catch {
       setTasks(sortTrackerTasks(initialTasks));
     } finally {
@@ -114,6 +122,16 @@ export function TrackerShell({ initialTasks, publishedAt }: TrackerShellProps) {
     window.localStorage.removeItem(trackerStorageKey);
   };
 
+  const handleUnlockCoo = () => {
+    setHasCooAccess(true);
+  };
+
+  const handleLockCoo = () => {
+    clearGrantedCooAccess();
+    setHasCooAccess(false);
+    setView("ceo");
+  };
+
   return (
     <main>
       <div className="sticky top-0 z-20 border-b border-line/70 bg-background/92 backdrop-blur">
@@ -154,13 +172,18 @@ export function TrackerShell({ initialTasks, publishedAt }: TrackerShellProps) {
       </div>
 
       {view === "coo" ? (
-        <StaticCooWorkspace
-          hasLocalChanges={hasLocalChanges}
-          onReset={handleReset}
-          onSaveTask={handleSaveTask}
-          publishedAt={publishedAt}
-          tasks={tasks}
-        />
+        hasCooAccess ? (
+          <StaticCooWorkspace
+            hasLocalChanges={hasLocalChanges}
+            onLock={handleLockCoo}
+            onReset={handleReset}
+            onSaveTask={handleSaveTask}
+            publishedAt={publishedAt}
+            tasks={tasks}
+          />
+        ) : (
+          <CooAccessPanel onUnlock={handleUnlockCoo} />
+        )
       ) : (
         <CeoTracker tasks={activeTasks} />
       )}
